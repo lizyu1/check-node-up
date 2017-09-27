@@ -5,14 +5,14 @@ import requests
 import json
 
 
-def main():
+def main(nodename):
     ''' request puppet node catalog_timestamp
         on success, check node up within last 30 mins
     ''' 
-
+    
     while True:
         try:
-            r = requests.get('http://<api>', timeout=1, auth=('user', 'pass'))
+            r = requests.get('http://abcd.tv/{0}'.format(nodename), timeout=1, auth=('user', 'pass'))
             r.raise_for_status()
             if r.status_code == 200:
                 d = r.json.loads(r)
@@ -37,7 +37,7 @@ def comparetimestamp(timestamp_puppet):
     epoch_puppet = calendar.timegm(utc_puppet)
     epoch_local = calendar.timegm(utc_local)
 
-    return epoch_puppet > epoch_local-1800:
+    return epoch_puppet > epoch_local-1800
 
 
 def dowork():
@@ -47,6 +47,5 @@ def dowork():
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1])
     
-
