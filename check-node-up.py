@@ -1,3 +1,4 @@
+
 import sys
 import os
 import calendar, time
@@ -41,11 +42,14 @@ def comparetimestamp(timestamp_puppet):
 
 
 def dowork():
-    # node is up, do what we need to here
     print "node is up"
-    pass
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    if len(sys.argv) == 2:
+        main(sys.argv[1])
+    else:
+        scriptname = sys.argv[0].split('/')[:-1]
+        print("Usage: {0} <hostname>".format(scriptname))
+
     
